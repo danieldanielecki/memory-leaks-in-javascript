@@ -1,3 +1,13 @@
+# Memory Leaks in JavaScript
+
+## Resources
+
+- https://devtoolstips.org/tips/en/find-memory-leaks/
+- https://github.com/facebook/memlab
+- https://nolanlawson.com/2021/12/17/introducing-fuite-a-tool-for-finding-memory-leaks-in-web-apps/
+- https://betterstack.com/community/guides/scaling-nodejs/high-performance-nodejs/nodejs-memory-leaks/
+
+
 <p align="center">
   <a href="https://revealjs.com">
   <img src="https://hakim-static.s3.amazonaws.com/reveal-js/logo/v1/reveal-black-text-sticker.png" alt="reveal.js" width="500">
