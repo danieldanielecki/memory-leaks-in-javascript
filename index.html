@@ -18,8 +18,18 @@
 			<div class="slides">
 				<section>Introduction</section>
 				<section>Definition</section>
+				<section>
+					<p>
+						Garbage is not memory leak. Garbage will always be freed sooner or later by the garbage collector.
+
+Memory leak is actually objects which still has a reference kept in a variable/constant/property somewhere, but that variable/constant/property is never used again and never goes out of scope. And FYI, JavaScript is not the only one which can keep an object reference. DOM can also do that.
+
+However, if your application produces garbage too fast, the garbage collector may not free the memory used by garbage fast enough. This will apper that the application keep consuming memory, but it's not memory leak. It's just that the rate of the garbage produced by an application is higher than the rate of garbage recycling.
+					</p>
+				</section>
 				<section>Examples w/Mitigation</section>
-				<subsection>Global Variables</subsection>
+				<section>Global Variables</section>
+				<section>
 				<pre>
 					<code class="language-javascript">
 						// Global Variable
@@ -31,6 +41,8 @@
 						})();
 					</code>
 				</pre>
+			</section>
+			<section>
 				<pre>
 					<code class="language-javascript">
 						function createLeak() {
@@ -46,6 +58,8 @@
 						}
 					</code>
 				</pre>
+			</section>
+			<section>
 				<pre>
 					<code class="language-javascript">
 						// This global variable will persist for the life of the program
@@ -64,15 +78,99 @@
 						}
 						</code>
 				</pre>
-				<subsection>Event Listeners</subsection>
-				<subsection>Closures</subsection>
-				<subsection>Detached DOM Nodes</subsection>
-				<subsection>Timers and Intervals</subsection>
+			</section>
+				<section>Event Listeners</section>
+				<section>
+				<pre>
+					<code class="language-javascript">
+// Event Listener
+document.getElementById('button').addEventListener('click', function() {
+	console.log('Button clicked');
+});
+
+// Mitigation
+const button = document.getElementById('button');
+button.addEventListener('click', function() {
+	console.log('Button clicked');
+});
+					</code>
+				</section>
+				<section>Closures</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							function outerFunction() {
+								let largeArray = new Array(1000000).fill('memory leak');
+								return function innerFunction() {
+										console.log(largeArray);
+								};
+						}
+						const leak = outerFunction(); // `largeArray` is retained in memory.
+</code>
+					</pre>
+					</section>
+					<section>
+				<pre>
+					<code class="language-javascript">
+						function closureLeak() {
+							let largeArray = new Array(1000000).fill("leak");
+							return function () {
+									console.log(largeArray[0]); // Large array is kept alive
+							};
+					}
+
+					let leakyFunc = closureLeak();
+					// Even when closureLeak() is done, `largeArray` remains in memory
+
+					function closureFix() {
+						let largeArray = new Array(1000000).fill("leak");
+						return function () {
+								console.log("No need to hold onto largeArray.");
+						};
+				}
+				let fixedFunc = closureFix();
+	</code>
+	</pre>
+				</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							var theThing = null;
+var replaceThing = function () {
+  var originalThing = theThing;
+  var unused = function () {
+    if (originalThing)
+      console.log("hi");
+  };
+  theThing = {
+    longStr: new Array(1000000).join('*'),
+    someMethod: function () {
+      console.log(someMessage);
+    }
+  };
+};
+setInterval(replaceThing, 1000);
+								</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							var closureVar = {};
+doWork(function callback() {
+  var data = closureVar.usefulData;
+  // Do a bunch of work
+  closureVar = null;
+});
+						</code></pre>
+				</section>
+				<section>Detached DOM Nodes</section>
+				<section>Timers and Intervals</section>
 				<section>Tooling</section>
-				<subsection>Chrome DevTools</subsection>
-				<subsection>MemLab</subsection>
-				<subsection>Fuite</subsection>
-				<subsection>WeakMap & WeakSet</subsection>
+				<section>Chrome DevTools</section>
+				<section>MemLab</section>
+				<section>Fuite</section>
+				<section>WeakMap & WeakSet</section>
 				<section>Closing</section>
 			</div>
 		</div>
