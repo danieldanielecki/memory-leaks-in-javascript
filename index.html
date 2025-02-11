@@ -1,35 +1,42 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Introduction</section>
-				<section>Definition</section>
-				<section>
-					<p>
-						Garbage is not memory leak. Garbage will always be freed sooner or later by the garbage collector.
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
 
-Memory leak is actually objects which still has a reference kept in a variable/constant/property somewhere, but that variable/constant/property is never used again and never goes out of scope. And FYI, JavaScript is not the only one which can keep an object reference. DOM can also do that.
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
 
-However, if your application produces garbage too fast, the garbage collector may not free the memory used by garbage fast enough. This will apper that the application keep consuming memory, but it's not memory leak. It's just that the rate of the garbage produced by an application is higher than the rate of garbage recycling.
-					</p>
-				</section>
-				<section>Examples w/Mitigation</section>
-				<section>Global Variables</section>
-				<section>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>Introduction</section>
+			<section>Definition</section>
+			<section>
+				<p>
+					Garbage is not memory leak. Garbage will always be freed sooner or later by the garbage collector.
+
+					Memory leak is actually objects which still has a reference kept in a variable/constant/property somewhere,
+					but that variable/constant/property is never used again and never goes out of scope. And FYI, JavaScript is
+					not the only one which can keep an object reference. DOM can also do that.
+
+					However, if your application produces garbage too fast, the garbage collector may not free the memory used by
+					garbage fast enough. This will apper that the application keep consuming memory, but it's not memory leak.
+					It's just that the rate of the garbage produced by an application is higher than the rate of garbage
+					recycling.
+				</p>
+			</section>
+			<section>Examples w/Mitigation</section>
+			<section>Global Variables</section>
+			<section>
 				<pre>
 					<code class="language-javascript">
 						// Global Variable
@@ -89,8 +96,8 @@ However, if your application produces garbage too fast, the garbage collector ma
 						</code>
 				</pre>
 			</section>
-				<section>Event Listeners</section>
-				<section>
+			<section>Event Listeners</section>
+			<section>
 				<pre>
 					<code class="language-javascript">
 // Event Listener
@@ -133,8 +140,8 @@ button.removeEventListener('click', function() {
 						const leak = outerFunction(); // `largeArray` is retained in memory.
 </code>
 					</pre>
-					</section>
-					<section>
+			</section>
+			<section>
 				<pre>
 					<code class="language-javascript">
 						function closureLeak() {
@@ -156,9 +163,9 @@ button.removeEventListener('click', function() {
 				let fixedFunc = closureFix();
 	</code>
 	</pre>
-				</section>
-				<section>
-					<pre>
+			</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							var theThing = null;
 var replaceThing = function () {
@@ -177,9 +184,9 @@ var replaceThing = function () {
 setInterval(replaceThing, 1000);
 								</code>
 					</pre>
-				</section>
-				<section>
-					<pre>
+			</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							var closureVar = {};
 doWork(function callback() {
@@ -188,28 +195,28 @@ doWork(function callback() {
   closureVar = null;
 });
 						</code></pre>
-				</section>
-				<section>Detached DOM Nodes</section>
-				<section>
-					<pre>
+			</section>
+			<section>Detached DOM Nodes</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							var element = document.getElementById('button');
 document.body.removeChild(element);
 element = null;
 						</code>
 					</pre>
-				</section>
-				<section>
-					<pre>
+			</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							let detachedNode = document.createElement('div');
 document.body.removeChild(detachedNode);
 // detachedNode is still referenced and cannot be garbage collected.
 						</code>
 					</pre>
-				</section>
-				<section>
-					<pre>
+			</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							let detachedNode;
 function createDetachedNode() {
@@ -223,19 +230,19 @@ function createDetachedNode() {
 detachedNode = null; // Remove reference manually when no longer needed
 						</code>
 					</pre>
-				</section>
-				<section>Timers and Intervals</section>
-				<section>
-					<pre>
+			</section>
+			<section>Timers and Intervals</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							let interval = setInterval(() => {
 									console.log('Interval');
 							}, 1000);
 						</code>
 						</pre>
-						</section>
-				<section>
-					<pre>
+			</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							let intervalId = setInterval(() => {
 								console.log("Interval running");
@@ -247,9 +254,9 @@ detachedNode = null; // Remove reference manually when no longer needed
 						clearInterval(intervalId); // Clear the interval when done
 						</code>
 						</pre>
-						</section>
-				<section>
-					<pre>
+			</section>
+			<section>
+				<pre>
 						<code class="language-javascript">
 							let intervalId = setInterval(function() {
 								console.log('Running...');
@@ -257,30 +264,31 @@ detachedNode = null; // Remove reference manually when no longer needed
 						// If not cleared, the interval will continue to run indefinitely.
 						</code>
 						</pre>
-						</section>
-				<section>Tooling</section>
-				<section>Chrome DevTools</section>
-				<section>MemLab</section>
-				<section>Fuite</section>
-				<section>WeakMap & WeakSet</section>
-				<section>Closing</section>
-			</div>
+			</section>
+			<section>Tooling</section>
+			<section>Chrome DevTools</section>
+			<section>MemLab</section>
+			<section>Fuite</section>
+			<section>WeakMap & WeakSet</section>
+			<section>Closing</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>
