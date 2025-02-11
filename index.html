@@ -79,6 +79,16 @@ However, if your application produces garbage too fast, the garbage collector ma
 						</code>
 				</pre>
 			</section>
+			<section>
+				<pre>
+					<code class="language-javascript">
+						function createGlobalVar() {
+							globalVar = "I'm a global variable"; // Implicitly global
+					}
+					createGlobalVar();
+						</code>
+				</pre>
+			</section>
 				<section>Event Listeners</section>
 				<section>
 				<pre>
@@ -93,6 +103,16 @@ const button = document.getElementById('button');
 button.addEventListener('click', function() {
 	console.log('Button clicked');
 });
+					</code>
+				</section>
+				<section>
+				<pre>
+					<code class="language-javascript">
+						const button = document.getElementById('myButton');
+						button.addEventListener('click', function() {
+								console.log('Button clicked!');
+						});
+						// If button is removed from the DOM but listener is not removed, it causes a leak.
 					</code>
 				</section>
 				<section>Closures</section>
