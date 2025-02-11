@@ -165,6 +165,40 @@ doWork(function callback() {
 						</code></pre>
 				</section>
 				<section>Detached DOM Nodes</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							var element = document.getElementById('button');
+document.body.removeChild(element);
+element = null;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							let detachedNode = document.createElement('div');
+document.body.removeChild(detachedNode);
+// detachedNode is still referenced and cannot be garbage collected.
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							let detachedNode;
+function createDetachedNode() {
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    document.body.removeChild(div); // Removed from DOM
+    detachedNode = div; // Still in memory
+}
+
+// fix
+detachedNode = null; // Remove reference manually when no longer needed
+						</code>
+					</pre>
+				</section>
 				<section>Timers and Intervals</section>
 				<section>Tooling</section>
 				<section>Chrome DevTools</section>
