@@ -103,6 +103,11 @@ const button = document.getElementById('button');
 button.addEventListener('click', function() {
 	console.log('Button clicked');
 });
+
+// Remove the event listener when it's no longer needed
+button.removeEventListener('click', function() {
+	console.log('Button clicked');
+});
 					</code>
 				</section>
 				<section>
@@ -220,6 +225,39 @@ detachedNode = null; // Remove reference manually when no longer needed
 					</pre>
 				</section>
 				<section>Timers and Intervals</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							let interval = setInterval(() => {
+									console.log('Interval');
+							}, 1000);
+						</code>
+						</pre>
+						</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							let intervalId = setInterval(() => {
+								console.log("Interval running");
+						}, 1000);
+
+						// Interval continues running even after it's no longer needed
+
+						// fix
+						clearInterval(intervalId); // Clear the interval when done
+						</code>
+						</pre>
+						</section>
+				<section>
+					<pre>
+						<code class="language-javascript">
+							let intervalId = setInterval(function() {
+								console.log('Running...');
+						}, 1000);
+						// If not cleared, the interval will continue to run indefinitely.
+						</code>
+						</pre>
+						</section>
 				<section>Tooling</section>
 				<section>Chrome DevTools</section>
 				<section>MemLab</section>
