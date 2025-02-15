@@ -266,10 +266,126 @@ detachedNode = null; // Remove reference manually when no longer needed
 						</pre>
 			</section>
 			<section>Tooling</section>
+			<section>
+				<h2>Tooling for Detecting Memory Leaks</h2>
+				<ul>
+					<li>Chrome DevTools: Use the Memory panel to take heap snapshots, record allocation timelines, and find
+						detached DOM nodes.</li>
+					<li>MemLab: A framework from Facebook for finding JavaScript memory leaks in web applications.</li>
+					<li>Fuite: A tool for finding memory leaks in web applications by analyzing heap snapshots.</li>
+					<li>WeakMap & WeakSet: Use these data structures to hold references to objects without preventing their
+						garbage collection.</li>
+				</ul>
+			</section>
 			<section>Chrome DevTools</section>
+			<section>
+				<h2>Using Chrome DevTools for Memory Leaks</h2>
+				<p>Chrome DevTools provides several tools to help identify and fix memory leaks:</p>
+				<ul>
+					<li><strong>Heap Snapshots:</strong> Take snapshots of the memory heap to see what objects are in memory and
+						how they are referenced.</li>
+					<li><strong>Allocation Timeline:</strong> Record memory allocations over time to see where memory is being
+						allocated and identify potential leaks.</li>
+					<li><strong>Allocation Profiler:</strong> Profile memory allocations to see which functions are allocating
+						memory and how much.</li>
+					<li><strong>Detached DOM Nodes:</strong> Find DOM nodes that are no longer attached to the document but are
+						still in memory.</li>
+				</ul>
+				<p>Steps to use Chrome DevTools for memory leak detection:</p>
+				<ol>
+					<li>Open Chrome DevTools (F12 or right-click and select "Inspect").</li>
+					<li>Go to the "Memory" panel.</li>
+					<li>Take a heap snapshot before performing actions that might cause a memory leak.</li>
+					<li>Perform the actions that might cause a memory leak.</li>
+					<li>Take another heap snapshot and compare it with the previous snapshot to identify objects that are not
+						being garbage collected.</li>
+					<li>Use the "Allocation Timeline" and "Allocation Profiler" to further investigate memory allocations.</li>
+				</ol>
+			</section>
 			<section>MemLab</section>
+			<section>
+				<h2>Using MemLab for Memory Leaks</h2>
+				<p>MemLab is a framework from Facebook for detecting JavaScript memory leaks in web applications. It provides
+					tools to analyze memory usage and identify leaks.</p>
+				<p>Steps to use MemLab:</p>
+				<ol>
+					<li>Install MemLab globally using npm:
+						<pre><code class="language-bash">npm install -g @memlab/core</code></pre>
+					</li>
+					<li>Initialize a new MemLab project:
+						<pre><code class="language-bash">memlab init</code></pre>
+					</li>
+					<li>Run a memory test:
+						<pre><code class="language-bash">memlab run --scenario ./path-to-your-scenario.js</code></pre>
+						<p>In the scenario file, define the steps to reproduce the memory leak:</p>
+						<pre><code class="language-javascript">
+							const {scenario} = require('@memlab/core');
+
+							scenario('Memory leak scenario', async (page) => {
+								// Navigate to the page
+								await page.goto('http://your-web-app.com');
+
+								// Perform actions that might cause a memory leak
+								await page.click('#button');
+								// Add more actions as needed
+							});
+						</code></pre>
+					</li>
+					<li>Analyze the results:
+						<pre><code class="language-bash">memlab analyze</code></pre>
+						<p>This command will generate a report showing potential memory leaks and their sources.</p>
+					</li>
+				</ol>
+			</section>
 			<section>Fuite</section>
+			<section>
+				<h2>Using Fuite for Memory Leaks</h2>
+				<p>Fuite is a tool for finding memory leaks in web applications by analyzing heap snapshots. It helps identify
+					objects that are not being garbage collected.</p>
+				<p>Steps to use Fuite:</p>
+				<ol>
+					<li>Install Fuite globally using npm:
+						<pre><code class="language-bash">npm install -g fuite</code></pre>
+					</li>
+					<li>Run Fuite on your web application:
+						<pre><code class="language-bash">fuite http://your-web-app.com</code></pre>
+					</li>
+					<li>Fuite will open the specified URL in a headless browser, interact with the page, and take heap snapshots
+						to analyze memory usage.</li>
+					<li>Review the generated report to identify potential memory leaks and their sources.</li>
+				</ol>
+				<p>Fuite provides a detailed report showing objects that are not being garbage collected and their references,
+					helping you pinpoint the source of memory leaks.</p>
+			</section>
 			<section>WeakMap & WeakSet</section>
+			<section>
+				<h2>Using WeakMap & WeakSet to Prevent Memory Leaks</h2>
+				<p>WeakMap and WeakSet are data structures that allow you to hold references to objects without preventing their
+					garbage collection. They are useful for managing memory and preventing leaks.</p>
+				<h3>WeakMap</h3>
+				<p>A WeakMap is a collection of key/value pairs where the keys are objects and the values can be arbitrary
+					values. The key objects are held weakly, meaning they do not prevent garbage collection if there are no other
+					references to the object.</p>
+				<pre><code class="language-javascript">
+					let weakMap = new WeakMap();
+					let obj = {};
+					weakMap.set(obj, 'some value');
+					// When `obj` is no longer referenced elsewhere, it can be garbage collected
+					obj = null; // Now `obj` can be garbage collected, and the entry in the WeakMap is removed
+				</code></pre>
+				<h3>WeakSet</h3>
+				<p>A WeakSet is a collection of objects, where the objects are held weakly. This means that if there are no
+					other references to an object stored in a WeakSet, the object can be garbage collected.</p>
+				<pre><code class="language-javascript">
+					let weakSet = new WeakSet();
+					let obj = {};
+					weakSet.add(obj);
+					// When `obj` is no longer referenced elsewhere, it can be garbage collected
+					obj = null; // Now `obj` can be garbage collected, and the entry in the WeakSet is removed
+				</code></pre>
+				<p>Using WeakMap and WeakSet can help you manage memory more effectively and prevent memory leaks by ensuring
+					that objects are not kept in memory longer than necessary.</p>
+			</section>
 			<section>Closing</section>
 		</div>
 	</div>
