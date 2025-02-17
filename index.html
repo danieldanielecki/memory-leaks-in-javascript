@@ -21,6 +21,36 @@
 			<section>Introduction</section>
 			<section>Definition</section>
 			<section>
+				<h2>What is a Memory Leak?</h2>
+				<p>A memory leak occurs when a program retains memory that is no longer needed, causing a gradual increase in
+					memory usage and potentially leading to performance issues or crashes. In JavaScript, memory leaks can happen
+					when objects are unintentionally kept in memory due to lingering references, preventing the garbage collector
+					from reclaiming that memory.</p>
+			</section>
+			<section>Stack vs Heap</section>
+			<section>
+				<h2>Stack vs Heap</h2>
+				<p>Stack and heap are two memory regions used for storing data in a computer's memory. They have different
+					characteristics and are used for different purposes:</p>
+				<ul>
+					<li><strong>Stack:</strong> The stack is a region of memory that stores variables and function calls in a
+						sequential order. It is used for storing local variables, function parameters, and return addresses. The
+						stack is a fixed-size memory region that grows and shrinks as functions are called and return.</li>
+					<li><strong>Heap:</strong> The heap is a region of memory that stores dynamically allocated memory. It is used
+						for storing objects, arrays, and other data structures that are created at runtime. The heap is a
+						dynamic-size memory region that grows and shrinks as memory is allocated and deallocated.</li>
+				</ul>
+				<p>Memory leaks can occur in both the stack and heap, but they are more common in the heap due to the dynamic
+					nature of memory allocation and deallocation.</p>
+			</section>
+			<section>
+				<img src="images/stack_vs_heap.png" alt="Stack" />
+			</section>
+			<section>Stack</section>
+			<section>
+				<img src="images/stack.png" alt="Stack" />
+			</section>
+			<section>
 				<p>
 					Garbage is not memory leak. Garbage will always be freed sooner or later by the garbage collector.
 
@@ -33,6 +63,9 @@
 					It's just that the rate of the garbage produced by an application is higher than the rate of garbage
 					recycling.
 				</p>
+			</section>
+			<section>
+				<img src="images/garbage.gif" alt="Stack Memory" />
 			</section>
 			<section>Examples w/Mitigation</section>
 			<section>Global Variables</section>
