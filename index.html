@@ -19,6 +19,14 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>Introduction</section>
+			<section>
+				<h2>Idea</h2>
+				<ol>
+					<li>Allocation (Creating variables/objects)</li>
+					<li>Usage (Using them in computations)</li>
+					<li>Deallocation (Garbage Collector removes unreferenced data)</li>
+				</ol>
+			</section>
 			<section>Definition</section>
 			<section>
 				<h2>What is a Memory Leak?</h2>
@@ -66,6 +74,14 @@
 			</section>
 			<section>
 				<img src="images/garbage.gif" alt="Stack Memory" />
+			</section>
+			<section>
+				<h2>Garbage</h2>
+				<ol>
+					<li>Step 1: Mark reachable objects</li>
+					<li>Step 2: Sweep away unreachable objects</li>
+					<li>Step 3: Free up memory</li>
+				</ol>
 			</section>
 			<section>Examples w/Mitigation</section>
 			<section>Global Variables</section>
