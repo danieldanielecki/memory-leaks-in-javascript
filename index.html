@@ -88,50 +88,25 @@
 			<section>
 				<pre>
 					<code class="language-javascript">
-						// Global Variable
-						var globalVar = 'I am a global variable';
-
-						// Mitigation
-						(function() {
-							var localVar = 'I am a local variable';
-						})();
-					</code>
-				</pre>
-			</section>
-			<section>
-				<pre>
-					<code class="language-javascript">
-						function createLeak() {
-							leak = "This is a leak!"; // Declares a global variable unintentionally
-						}
-
-						createLeak();
-						console.log(window.leak); // Accessible globally
-
-						// Mitigation
-						function createLeak() {
-							let leak = "No leak here!"; // Use `let`, `const`, or `var`
-						}
-					</code>
-				</pre>
-			</section>
-			<section>
-				<pre>
-					<code class="language-javascript">
-						// This global variable will persist for the life of the program
-						// and cause a memory leak if it holds onto references to objects
-						// that are no longer needed.
-						let data = [];
+						let serverData = [];
 
 						function fetchData() {
-							data = getDataFromServer();
+							serverData = [{
+								1: "one",
+								2: "two",
+							}];
+							// serverData = getDataFromServer();
 						}
 
-						// To prevent the memory leak, we need to set the global variable
-						// to null when it is no longer needed.
+						fetchData();
+						console.log('my server data', serverData);
+
+						// Mitigation
 						function clearData() {
-							data = null;
+							serverData = null;
 						}
+						clearData();
+						console.log('my server data', serverData);
 						</code>
 				</pre>
 			</section>
