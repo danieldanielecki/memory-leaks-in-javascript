@@ -224,18 +224,15 @@ doWork(function callback() {
 			<section>
 				<pre>
 						<code class="language-javascript">
-							var element = document.getElementById('button');
-document.body.removeChild(element);
-element = null;
-						</code>
-					</pre>
-			</section>
-			<section>
-				<pre>
-						<code class="language-javascript">
-							let detachedNode = document.createElement('div');
-document.body.removeChild(detachedNode);
-// detachedNode is still referenced and cannot be garbage collected.
+							let detachedNode;
+							function createDetachedNode() {
+								const div = document.createElement("div");
+								document.body.appendChild(div);
+								document.body.removeChild(div); // Removed from DOM
+								detachedNode = div; // Still in memory
+								console.log("detachedNode before setting to null: ", detachedNode);
+							}
+							createDetachedNode();
 						</code>
 					</pre>
 			</section>
@@ -243,15 +240,18 @@ document.body.removeChild(detachedNode);
 				<pre>
 						<code class="language-javascript">
 							let detachedNode;
-function createDetachedNode() {
-    const div = document.createElement('div');
-    document.body.appendChild(div);
-    document.body.removeChild(div); // Removed from DOM
-    detachedNode = div; // Still in memory
-}
+							function createDetachedNode() {
+								const div = document.createElement("div");
+								document.body.appendChild(div);
+								document.body.removeChild(div); // Removed from DOM
+								detachedNode = div; // Still in memory
+								console.log("detachedNode before setting to null: ", detachedNode);
+							}
+							createDetachedNode();
 
-// fix
-detachedNode = null; // Remove reference manually when no longer needed
+							// fix
+							detachedNode = null; // Remove reference manually when no longer needed
+							console.log("detachedNode after setting to null: ", detachedNode);
 						</code>
 					</pre>
 			</section>
