@@ -13,27 +13,50 @@
 
 	<!-- Theme used for syntax highlighted code -->
 	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		.fragment.blur {
+			filter: blur(1rem);
+		}
+
+		.fragment.blur.visible {
+			filter: none;
+		}
+	</style>
 </head>
 
 <body>
 	<div class="reveal">
 		<div class="slides">
-			<section>Introduction</section>
-			<section>
-				<h2>Idea</h2>
+			<section data-transition="zoom" data-transition-speed="slow">Introduction</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>101</h2>
 				<ol>
-					<li>Allocation (Creating variables/objects)</li>
-					<li>Usage (Using them in computations)</li>
-					<li>Deallocation (Garbage Collector removes unreferenced data)</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Allocation (Creating variables/objects)</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Usage (Using them in computations)</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Deallocation (Garbage Collector removes
+						unreferenced data)</li>
 				</ol>
 			</section>
-			<section>Definition</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">Definition</section>
+			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>What is a Memory Leak?</h2>
-				<p>A memory leak occurs when a program retains memory that is no longer needed, causing a gradual increase in
-					memory usage and potentially leading to performance issues or crashes. In JavaScript, memory leaks can happen
-					when objects are unintentionally kept in memory due to lingering references, preventing the garbage collector
-					from reclaiming that memory.</p>
+				<ol>
+					<li class="fragment custom blur highlight-current-white fade-up">In general; memory is allocated, but
+						fails to release it when it’s no longer needed.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">In JavaScript; references to objects remain
+						in memory even though they are no longer needed.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Deeper; Garbage Collector (GC) cannot reclaim
+						that memory.</li>
+				</ol>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Problems</h2>
+				<ol>
+					<li class="fragment custom blur highlight-current-white fade-up">Best case; excessive memory consumption.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Moving on; performance degradation.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Worst case; application crashes.</li>
+				</ol>
 			</section>
 			<section>Stack vs Heap</section>
 			<section>
