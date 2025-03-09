@@ -107,82 +107,125 @@
 				</ol>
 			</section>
 			<section>Examples w/Mitigation</section>
-			<section>Global Variables</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Global Variables</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Global Variables: leak</h2>
 				<pre>
 					<code class="language-javascript">
-						let serverData = [];
+let serverData = [];
 
-						function fetchData() {
-							serverData = [{
-								1: "one",
-								2: "two",
-							}];
-							// serverData = getDataFromServer();
-						}
+function fetchData() {
+	serverData = [{
+		1: "one",
+		2: "two",
+	}];
+	// serverData = getDataFromServer();
+}
 
-						fetchData();
-						console.log('my server data', serverData);
-
-						// Mitigation
-						function clearData() {
-							serverData = null;
-						}
-						clearData();
-						console.log('my server data', serverData);
+fetchData();
+console.log('my server data: ', serverData);
 						</code>
 				</pre>
 			</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Global Variables: mitigation</h2>
 				<pre>
 					<code class="language-javascript">
-						function createGlobalVar() {
-							globalVar = "I'm a global variable"; // Implicitly global
-					}
-					createGlobalVar();
+let serverData = [];
 
-					// fix: use const, let, or even var inside a function
+function fetchData() {
+	serverData = [{
+		1: "one",
+		2: "two",
+	}];
+	// serverData = getDataFromServer();
+}
+
+fetchData();
+console.log('my server data: ', serverData);
+
+// Mitigation
+function clearData() {
+	serverData = null;
+}
+clearData();
+console.log('my server data: ', serverData);
 						</code>
 				</pre>
 			</section>
-			<section>Detached DOM Nodes</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Global Variables: leak</h2>
+				<pre>
+					<code class="language-javascript">
+function createGlobalVar() {
+	globalVar = "I'm a global variable"; // Implicitly global
+}
+createGlobalVar();
+
+console.log(window.globalVar) // Implicitly global check
+</code>
+				</pre>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Global Variables: mitigation</h2>
+				<pre>
+					<code class="language-javascript">
+function createGlobalVar() {
+	let globalVar = "I'm a global variable"; // or const, or even var
+}
+createGlobalVar();
+
+console.log(window.globalVar) // no longer implicitly global
+</code>
+				</pre>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Detached DOM Nodes</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Detached DOM Nodes: leak</h2>
 				<pre>
 						<code class="language-javascript">
-							let detachedNode;
-							function createDetachedNode() {
-								const div = document.createElement("div");
-								document.body.appendChild(div);
-								document.body.removeChild(div); // Removed from DOM
-								detachedNode = div; // Still in memory
-								console.log("detachedNode before setting to null: ", detachedNode);
-							}
-							createDetachedNode();
+let detachedNode;
+function createDetachedNode() {
+	const div = document.createElement("div");
+	document.body.appendChild(div);
+	document.body.removeChild(div); // Removed from DOM
+	detachedNode = div; // Still in memory
+	console.log("detachedNode before setting to null: ", detachedNode);
+}
+createDetachedNode();
 						</code>
 					</pre>
 			</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Detached DOM Nodes: mitigation</h2>
 				<pre>
 						<code class="language-javascript">
-							let detachedNode;
-							function createDetachedNode() {
-								const div = document.createElement("div");
-								document.body.appendChild(div);
-								document.body.removeChild(div); // Removed from DOM
-								detachedNode = div; // Still in memory
-								console.log("detachedNode before setting to null: ", detachedNode);
-							}
-							createDetachedNode();
+let detachedNode;
+function createDetachedNode() {
+	const div = document.createElement("div");
+	document.body.appendChild(div);
+	document.body.removeChild(div); // Removed from DOM
+	detachedNode = div; // Still in memory
+	console.log("detachedNode before setting to null: ", detachedNode);
+}
+createDetachedNode();
 
-							// fix
-							detachedNode = null; // Remove reference manually when no longer needed
-							console.log("detachedNode after setting to null: ", detachedNode);
+// fix
+detachedNode = null; // Remove reference manually when no longer needed
+console.log("detachedNode after setting to null: ", detachedNode);
 						</code>
 					</pre>
 			</section>
 
-			<section>Closures</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Closures</h2>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Closures: leak</h2>
 				<pre>
 					<code class="language-javascript">
 						function outerFunction() {
@@ -195,7 +238,8 @@
 </code>
 				</pre>
 			</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Closures: mitigation</h2>
 				<pre>
 					<code class="language-javascript">
 						function outerFunction() {
@@ -216,18 +260,6 @@
 				const leak = outerFunction(); // `largeArray` is retained in memory.
 </code>
 				</pre>
-			</section>
-			<section>
-				<pre>
-				<code class="language-javascript">
-					function closureLeak() {
-						let largeArray = new Array(1000000).fill("leak");
-						return function () {
-							console.log("No need to hold onto largeArray."); // or null it afterwards
-						};
-				}
-</code>
-</pre>
 			</section>
 			<section>Event Listeners</section>
 			<section>
@@ -429,6 +461,7 @@ button.removeEventListener('click', function() {
 		// - https://revealjs.com/config/
 		Reveal.initialize({
 			hash: true,
+			slideNumber: 'c/t',
 
 			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
