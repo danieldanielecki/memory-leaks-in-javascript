@@ -157,6 +157,55 @@
 						</code>
 					</pre>
 			</section>
+
+			<section>Closures</section>
+			<section>
+				<pre>
+					<code class="language-javascript">
+						function outerFunction() {
+							let largeArray = new Array(1000000).fill('memory leak');
+							return function innerFunction() {
+									console.log(largeArray);
+							};
+					}
+					const leak = outerFunction(); // `largeArray` is retained in memory.
+</code>
+				</pre>
+			</section>
+			<section>
+				<pre>
+					<code class="language-javascript">
+						function outerFunction() {
+							let largeArray = new Array(1000000).fill('memory leak');
+							return function innerFunction() {
+									console.log(largeArray);
+							};
+					}
+					const leak = outerFunction(); // `largeArray` is retained in memory.
+
+					// fix
+					function outerFunction() {
+						let largeArray = new Array(1000000).fill('memory leak');
+						return function innerFunction() {
+								console.log(largeArray);
+						};
+				}
+				const leak = outerFunction(); // `largeArray` is retained in memory.
+</code>
+				</pre>
+			</section>
+			<section>
+				<pre>
+				<code class="language-javascript">
+					function closureLeak() {
+						let largeArray = new Array(1000000).fill("leak");
+						return function () {
+							console.log("No need to hold onto largeArray."); // or null it afterwards
+						};
+				}
+</code>
+</pre>
+			</section>
 			<section>Event Listeners</section>
 			<section>
 				<pre>
@@ -188,75 +237,6 @@ button.removeEventListener('click', function() {
 						// If button is removed from the DOM but listener is not removed, it causes a leak.
 					</code>
 				</section>
-				<section>Closures</section>
-				<section>
-					<pre>
-						<code class="language-javascript">
-							function outerFunction() {
-								let largeArray = new Array(1000000).fill('memory leak');
-								return function innerFunction() {
-										console.log(largeArray);
-								};
-						}
-						const leak = outerFunction(); // `largeArray` is retained in memory.
-</code>
-					</pre>
-			</section>
-			<section>
-				<pre>
-					<code class="language-javascript">
-						function closureLeak() {
-							let largeArray = new Array(1000000).fill("leak");
-							return function () {
-									console.log(largeArray[0]); // Large array is kept alive
-							};
-					}
-
-					let leakyFunc = closureLeak();
-					// Even when closureLeak() is done, `largeArray` remains in memory
-
-					function closureFix() {
-						let largeArray = new Array(1000000).fill("leak");
-						return function () {
-								console.log("No need to hold onto largeArray.");
-						};
-				}
-				let fixedFunc = closureFix();
-	</code>
-	</pre>
-			</section>
-			<section>
-				<pre>
-						<code class="language-javascript">
-							var theThing = null;
-var replaceThing = function () {
-  var originalThing = theThing;
-  var unused = function () {
-    if (originalThing)
-      console.log("hi");
-  };
-  theThing = {
-    longStr: new Array(1000000).join('*'),
-    someMethod: function () {
-      console.log(someMessage);
-    }
-  };
-};
-setInterval(replaceThing, 1000);
-								</code>
-					</pre>
-			</section>
-			<section>
-				<pre>
-						<code class="language-javascript">
-							var closureVar = {};
-doWork(function callback() {
-  var data = closureVar.usefulData;
-  // Do a bunch of work
-  closureVar = null;
-});
-						</code></pre>
-			</section>
 			<section>Timers and Intervals</section>
 			<section>
 				<pre>
