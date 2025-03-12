@@ -6,7 +6,18 @@
 - https://github.com/facebook/memlab
 - https://nolanlawson.com/2021/12/17/introducing-fuite-a-tool-for-finding-memory-leaks-in-web-apps/
 - https://betterstack.com/community/guides/scaling-nodejs/high-performance-nodejs/nodejs-memory-leaks/
-
+- https://stackoverflow.com/questions/16256487/how-do-i-create-a-memory-leak-in-javascript
+- https://stackoverflow.com/questions/15970525/how-to-find-js-memory-leaks
+- https://stackoverflow.com/questions/72876350/why-does-closure-cause-memory-leak-in-javascript-in-this-case
+- https://stackoverflow.com/questions/19550253/memory-leaks-and-closures-in-javascript-when-and-why
+- https://stackoverflow.com/questions/21226646/locating-detached-dom-tree-memory-leak
+- https://stackoverflow.com/questions/67499840/javascript-closures-cause-memory-leak
+- https://medium.com/@srinumadhav36/memory-management-with-closures-in-node-js-6bf09b3adfde
+- https://medium.com/@rahul.jindal57/memory-leaks-in-dom-elements-and-closures-b3452f129dac
+- https://stackoverflow.com/questions/19621074/finding-javascript-memory-leaks-with-chrome
+- https://developer.chrome.com/docs/devtools/memory
+- https://dreamix.eu/insights/hunting-memory-leaks-in-javascript-using-chrome-devtools/
+- https://dev.to/alisamir/memory-leaks-in-javascript-a-simple-guide-31e8
 
 <p align="center">
   <a href="https://revealjs.com">
@@ -54,7 +65,7 @@ Hakim's open source work is supported by <a href="https://github.com/sponsors/ha
 - 🖌 [Try the visual editor for reveal.js at Slides.com](https://slides.com/)
 - 🎬 [Watch the reveal.js video course (paid)](https://revealjs.com/course)
 
---- 
+---
 <div align="center">
   MIT licensed | Copyright © 2011-2024 Hakim El Hattab, https://hakim.se
 </div>
