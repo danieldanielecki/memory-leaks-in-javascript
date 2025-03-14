@@ -64,10 +64,12 @@
 				<p>Stack and heap are two memory regions used for storing data in a computer's memory. They have different
 					characteristics and are used for different purposes:</p>
 				<ul>
-					<li><strong>Stack:</strong> The stack is a region of memory that stores variables and function calls in a
+					<li class="fragment custom blur highlight-current-white fade-up"><strong>Stack:</strong> The stack is a region
+						of memory that stores variables and function calls in a
 						sequential order. It is used for storing local variables, function parameters, and return addresses. The
 						stack is a fixed-size memory region that grows and shrinks as functions are called and return.</li>
-					<li><strong>Heap:</strong> The heap is a region of memory that stores dynamically allocated memory. It is used
+					<li class="fragment custom blur highlight-current-white fade-up"><strong>Heap:</strong> The heap is a region
+						of memory that stores dynamically allocated memory. It is used
 						for storing objects, arrays, and other data structures that are created at runtime. The heap is a
 						dynamic-size memory region that grows and shrinks as memory is allocated and deallocated.</li>
 				</ul>
@@ -101,14 +103,38 @@
 			<section>
 				<h2>Garbage</h2>
 				<ol>
-					<li>Step 1: Mark reachable objects</li>
-					<li>Step 2: Sweep away unreachable objects</li>
-					<li>Step 3: Free up memory</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Step 1: Mark reachable objects</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Step 2: Sweep away unreachable objects</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Step 3: Free up memory</li>
 				</ol>
 			</section>
-			<section>Examples w/Mitigation</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h1>Global Variables</h1>
+				<h2>Examples & Fixes</h2>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Memory Leak</h2>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Memory Leak</h2>
+				<pre>
+					<code class="language-javascript" data-trim data-line-numbers="|1|3,10|12|4|5-7|8|9">
+const x = [];
+
+function grow() {
+	const fragment = document.createDocumentFragment();
+	for (let i = 0; i < 10000; i++) {
+		fragment.appendChild(document.createElement("div"));
+	}
+	document.body.appendChild(fragment);
+	x.push("x".repeat(999999));
+}
+
+document.getElementById("grow").addEventListener("click", grow);
+						</code>
+				</pre>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Global Variables</h2>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Global Variables: leak</h2>
@@ -182,7 +208,7 @@ console.log(window.globalVar) // no longer implicitly global
 				</pre>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h1>Detached DOM Nodes</h1>
+				<h2>Detached DOM Nodes</h2>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Detached DOM Nodes: leak</h2>
@@ -319,30 +345,35 @@ button.removeEventListener('click', function() {
 						</code>
 						</pre>
 			</section>
-			<section>Tooling</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Tooling</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Tooling for Detecting Memory Leaks</h2>
 				<ul>
-					<li>Chrome DevTools</li>
-					<li>MemLab</li>
-					<li>Fuite</li>
-					<li>WeakMap & WeakSet</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Chrome DevTools</li>
+					<li class="fragment custom blur highlight-current-white fade-up">MemLab</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Fuite</li>
+					<li class="fragment custom blur highlight-current-white fade-up">WeakMap & WeakSet</li>
 				</ul>
 			</section>
-			<section>Chrome DevTools</section>
-			<section>
-				<h2>Chrome DevTools</h2>
-				<p>Chrome DevTools provides several tools to help identify and fix memory leaks:</p>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Chrome DevTools</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Several tools</h2>
 				<ul>
-					<li>Heap Snapshots</li>
-					<li>Allocation Timeline</li>
-					<li>Allocation Profiler</li>
-					<li>Detached DOM Nodes</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Heap Snapshots</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Allocation Timeline</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Allocation Profiler</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Detached DOM Nodes</li>
 				</ul>
 			</section>
-			<section>MemLab</section>
-			<section>
-				<h2>MemLab</h2>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>MemLab</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>CLI & Code</h2>
 				<pre><code class="language-bash" data-line-numbers>memlab run --scenario scenario.js --verbose --debug --headful</code></pre>
 				<pre><code class="language-javascript" data-trim data-line-numbers="|1|2-4|6">
 // initial page load's url
@@ -353,9 +384,11 @@ function url() {
 module.exports = { url };
 				</code></pre>
 			</section>
-			<section>Fuite</section>
-			<section>
-				<h2>Fuite</h2>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Fuite</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>CLI</h2>
 				<pre><code class="language-bash" data-line-numbers>npx fuite http://your-web-app.com</code></pre>
 			</section>
 			<section>WeakMap & WeakSet</section>
@@ -387,10 +420,16 @@ module.exports = { url };
 				<p>Using WeakMap and WeakSet can help you manage memory more effectively and prevent memory leaks by ensuring
 					that objects are not kept in memory longer than necessary.</p>
 			</section>
-			<section>Closing</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Closing</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Contact</h2>
-				<img src="images/qr.png" alt="QR Code to danieldanielecki.com" />
+				<img src="images/qr.png" alt="QR Code to danieldanielecki.com" height="400vh" />
+				<p style="font-size: 1rem; margin-top: -2rem;">redirects to <a href="https://danieldanielecki.com"
+						target="_blank">danieldanielecki.com</a></p>
+
+				<img src="images/social-media.png" alt="Social Media for Daniel Danielecki" height="80vh" />
 			</section>
 		</div>
 	</div>
