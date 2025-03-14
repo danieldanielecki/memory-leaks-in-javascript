@@ -28,9 +28,16 @@
 <body>
 	<div class="reveal">
 		<div class="slides">
-			<section data-transition="zoom" data-transition-speed="slow">Introduction</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>101</h2>
+				<h1 style="margin: 20vh auto;">Memory Leaks</h1>
+				<p>Daniel Danielecki</p>
+				<div style="font-size: 1.5rem">
+					<small style="display: block;">Amsterdam, The Netherlands</small>
+					<small>March 21, 2025</small>
+				</div>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>101</h1>
 				<ol>
 					<li class="fragment custom blur highlight-current-white fade-up">Allocation (Creating variables/objects)</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Usage (Using them in computations)</li>
@@ -38,7 +45,9 @@
 						unreferenced data)</li>
 				</ol>
 			</section>
-			<section data-transition="zoom" data-transition-speed="slow">Definition</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Definition</h1>
+			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>What is a Memory Leak?</h2>
 				<ol>
@@ -51,7 +60,7 @@
 				</ol>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>Problems</h2>
+				<h1>Problems</h1>
 				<ol>
 					<li class="fragment custom blur highlight-current-white fade-up">Best case; excessive memory consumption.</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Moving on; performance degradation.</li>
@@ -76,12 +85,14 @@
 				<p>Memory leaks can occur in both the stack and heap, but they are more common in the heap due to the dynamic
 					nature of memory allocation and deallocation.</p>
 			</section>
-			<section>
-				<img src="images/stack_vs_heap.png" alt="Stack" />
+			<section data-transition="zoom" data-transition-speed="slow">
+				<img src="images/stack_vs_heap.png" alt="Stack" height="600vh" />
 			</section>
-			<section>Stack</section>
-			<section>
-				<img src="images/stack.png" alt="Stack" />
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Stack</h1>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<img src="images/stack.png" alt="Stack" height="600vh" />
 			</section>
 			<section>
 				<p>
@@ -97,22 +108,22 @@
 					recycling.
 				</p>
 			</section>
-			<section>
-				<img src="images/garbage.gif" alt="Stack Memory" />
+			<section data-transition="zoom" data-transition-speed="slow">
+				<img src="images/garbage.gif" alt="Stack Memory" height="600vh" />
 			</section>
-			<section>
-				<h2>Garbage</h2>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Garbage</h1>
 				<ol>
-					<li class="fragment custom blur highlight-current-white fade-up">Step 1: Mark reachable objects</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Step 2: Sweep away unreachable objects</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Step 3: Free up memory</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Mark reachable objects</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Sweep away unreachable objects</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Free up memory</li>
 				</ol>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>Examples & Fixes</h2>
+				<h1>Examples & Fixes</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>Memory Leak</h2>
+				<h1>Memory Leak</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Memory Leak</h2>
@@ -134,7 +145,7 @@ document.getElementById("grow").addEventListener("click", grow);
 				</pre>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>Global Variables</h2>
+				<h1>Global Variables</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Global Variables: leak</h2>
@@ -208,7 +219,7 @@ console.log(window.globalVar) // no longer implicitly global
 				</pre>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>Detached DOM Nodes</h2>
+				<h1>Detached DOM Nodes</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Detached DOM Nodes: leak</h2>
@@ -248,7 +259,7 @@ console.log("detachedNode after setting to null: ", detachedNode);
 			</section>
 
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>Closures</h2>
+				<h1>Closures</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Closures: leak</h2>
@@ -283,7 +294,7 @@ const leak = outerFunction();
 				</pre>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h2>Event Listeners</h2>
+				<h1>Event Listeners</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Event Listeners: leak</h2>
