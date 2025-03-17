@@ -353,39 +353,32 @@ button.removeEventListener('click', function() {
 });
 						</code>
 					</section>
-			<section>Timers and Intervals</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">Timers and Intervals</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Timers and Intervals: leak</h2>
 				<pre>
-						<code class="language-javascript">
-							let interval = setInterval(() => {
-									console.log('Interval');
-							}, 1000);
-						</code>
-						</pre>
-			</section>
-			<section>
-				<pre>
-						<code class="language-javascript">
-							let intervalId = setInterval(() => {
-								console.log("Interval running");
-						}, 1000);
+					<code class="language-javascript" data-trim data-line-numbers="|1,3|5|2|3|6">
+let interval = setInterval(() => {
+	console.log('Interval');
+}, 1000);
 
-						// Interval continues running even after it's no longer needed
-
-						// fix
-						clearInterval(intervalId); // Clear the interval when done
-						</code>
-						</pre>
+interval();
+// Interval continues running indefinitely even after it's no longer needed
+					</code>
+				</pre>
 			</section>
-			<section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Timers and Intervals: mitigation</h2>
 				<pre>
-						<code class="language-javascript">
-							let intervalId = setInterval(function() {
-								console.log('Running...');
-						}, 1000);
-						// If not cleared, the interval will continue to run indefinitely.
-						</code>
-						</pre>
+					<code class="language-javascript" data-trim data-line-numbers="|3">
+let interval = setInterval(() => {
+	console.log("Interval");
+	clearInterval(interval); // fix
+}, 1000);
+
+interval();
+					</code>
+				</pre>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h1>Tooling</h1>
