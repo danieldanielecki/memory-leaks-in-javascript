@@ -18,6 +18,9 @@
 - https://developer.chrome.com/docs/devtools/memory
 - https://dreamix.eu/insights/hunting-memory-leaks-in-javascript-using-chrome-devtools/
 - https://dev.to/alisamir/memory-leaks-in-javascript-a-simple-guide-31e8
+- https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/#Leaks-in-JavaScript
+- https://developer.chrome.com/docs/devtools/memory-problems
+- https://learn.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/memory-problems/dom-leaks
 
 <p align="center">
   <a href="https://revealjs.com">
