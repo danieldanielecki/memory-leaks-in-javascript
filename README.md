@@ -21,6 +21,7 @@
 - https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/#Leaks-in-JavaScript
 - https://developer.chrome.com/docs/devtools/memory-problems
 - https://learn.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/memory-problems/dom-leaks
+- https://medium.com/@schaman762/debugging-javascript-memory-leaks-how-to-find-and-fix-performance-killers-129ea292e27f
 
 <p align="center">
   <a href="https://revealjs.com">

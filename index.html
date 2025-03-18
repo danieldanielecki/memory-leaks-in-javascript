@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>reveal.js</title>
+	<title>Memory Leaks in JavaScript | Daniel Danielecki</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -426,37 +426,72 @@ module.exports = { url };
 				<h2>CLI</h2>
 				<pre><code class="language-bash" data-line-numbers>npx fuite http://your-web-app.com</code></pre>
 			</section>
-			<section>WeakMap & WeakSet</section>
-			<section>
-				<h2>Using WeakMap & WeakSet to Prevent Memory Leaks</h2>
-				<p>WeakMap and WeakSet are data structures that allow you to hold references to objects without preventing their
-					garbage collection. They are useful for managing memory and preventing leaks.</p>
-				<h3>WeakMap</h3>
-				<p>A WeakMap is a collection of key/value pairs where the keys are objects and the values can be arbitrary
-					values. The key objects are held weakly, meaning they do not prevent garbage collection if there are no other
-					references to the object.</p>
-				<pre><code class="language-javascript">
-					let weakMap = new WeakMap();
-					let obj = {};
-					weakMap.set(obj, 'some value');
-					// When `obj` is no longer referenced elsewhere, it can be garbage collected
-					obj = null; // Now `obj` can be garbage collected, and the entry in the WeakMap is removed
-				</code></pre>
-				<h3>WeakSet</h3>
-				<p>A WeakSet is a collection of objects, where the objects are held weakly. This means that if there are no
-					other references to an object stored in a WeakSet, the object can be garbage collected.</p>
-				<pre><code class="language-javascript">
-					let weakSet = new WeakSet();
-					let obj = {};
-					weakSet.add(obj);
-					// When `obj` is no longer referenced elsewhere, it can be garbage collected
-					obj = null; // Now `obj` can be garbage collected, and the entry in the WeakSet is removed
-				</code></pre>
-				<p>Using WeakMap and WeakSet can help you manage memory more effectively and prevent memory leaks by ensuring
-					that objects are not kept in memory longer than necessary.</p>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>WeakMap & WeakSet</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h1>Closing</h1>
+				<h2>WeakMap & WeakSet</h2>
+				<ul>
+					<li class="fragment custom blur highlight-current-white fade-up">Data structures.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Allow you to hold references to objects
+						without preventing their
+						garbage collection.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Useful for managing memory and preventing
+						leaks.</li>
+				</ul>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>WeakMap</h2>
+				<ul>
+					<li class="fragment custom blur highlight-current-white fade-up">Collection of key/value pairs.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Keys are objects and the values can be
+						arbitrary
+						values.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Key objects are held weakly.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Meaning they do not prevent garbage
+						collection if there are no other
+						references to the object.</li>
+				</ul>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>WeakMap</h2>
+				<pre><code class="language-javascript" data-trim data-line-numbers="|1|2|3|4|5">
+let weakMap = new WeakMap();
+let obj = {};
+weakMap.set(obj, 'some value');
+// When `obj` is no longer referenced elsewhere, it can be garbage collected
+obj = null; // Now `obj` can be garbage collected, and the entry in the WeakMap is removed
+				</code></pre>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>WeakSet</h2>
+				<ul>
+					<li class="fragment custom blur highlight-current-white fade-up">Collection of objects.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Objects are held weakly.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Meaning that if there are no other
+						references to an object stored in a WeakSet, the object can be garbage collected.</li>
+				</ul>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>WeakSet</h2>
+				<pre><code class="language-javascript" data-trim data-line-numbers="|1|2|3|4|5">
+let weakSet = new WeakSet();
+let obj = {};
+weakSet.add(obj);
+// When `obj` is no longer referenced elsewhere, it can be garbage collected
+obj = null; // Now `obj` can be garbage collected, and the entry in the WeakSet is removed
+				</code></pre>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>WeakMap & WeakSet</h2>
+				<ul>
+					<li class="fragment custom blur highlight-current-white fade-up">Can help manage memory more effectively.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Prevent memory leaks by ensuring that objects
+						are not kept in memory longer than necessary.</li>
+				</ul>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h1>Summary</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Contact</h2>
