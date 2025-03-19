@@ -22,6 +22,18 @@
 - https://developer.chrome.com/docs/devtools/memory-problems
 - https://learn.microsoft.com/en-us/microsoft-edge/devtools-guide-chromium/memory-problems/dom-leaks
 - https://medium.com/@schaman762/debugging-javascript-memory-leaks-how-to-find-and-fix-performance-killers-129ea292e27f
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management
+- https://stackoverflow.com/questions/65067147/can-a-bi-directional-weakmap-lead-to-a-memory-leak
+- https://www.youtube.com/watch?v=j4Uvk5zxrhM
+- https://forum.freecodecamp.org/t/memory-leak-in-javascript-from-shared-closures/300605
+- https://dev.to/mshidlov/how-closures-can-cause-memory-leaks-and-what-you-can-do-about-it-fjd
+- https://www.reddit.com/r/C_Programming/comments/137ko90/memory_leaks_and_global_variables/
+- https://stackoverflow.com/questions/78957733/how-to-find-where-my-memory-leak-is-in-angular-17-ssr
+- https://www.guvi.in/blog/memory-leaks-in-javascript-application/
+- https://www.geeksforgeeks.org/how-to-handle-memory-leaks-in-javascript/
+- https://www.reddit.com/r/learnjavascript/comments/qfycwa/how_can_you_prevent_memory_leaks_when_using/
+- https://stackoverflow.com/questions/2513785/is-memory-leak-caused-by-global-variables
+-
 
 <p align="center">
   <a href="https://revealjs.com">
