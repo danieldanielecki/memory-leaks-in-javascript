@@ -125,33 +125,33 @@
 			<section data-transition="zoom" data-transition-speed="slow">
 				<img src="images/stack.png" alt="Stack" height="600vh" />
 			</section>
-			<section>
-				<p>
-					Garbage is not memory leak. Garbage will always be freed sooner or later by the garbage collector.
-
-					Memory leak is actually objects which still has a reference kept in a variable/constant/property somewhere,
-					but that variable/constant/property is never used again and never goes out of scope. And FYI, JavaScript is
-					not the only one which can keep an object reference. DOM can also do that.
-
-					However, if your application produces garbage too fast, the garbage collector may not free the memory used by
-					garbage fast enough. This will apper that the application keep consuming memory, but it's not memory leak.
-					It's just that the rate of the garbage produced by an application is higher than the rate of garbage
-					recycling.
-				</p>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Garbage</h2>
+				<ul>
+					<li class="fragment custom blur highlight-current-white fade-up">Is not memory leak.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Garbage will always be freed sooner or later
+						by the garbage collector.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">If your application produces garbage too
+						fast,
+						the garbage collector may not free the memory used by garbage fast enough.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">This will appear that the application keep
+						consuming memory, but it's not memory leak. It's just that the rate of the garbage produced by an
+						application is higher than the rate of garbage recycling.</li>
+				</ul>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Garbage Collector</h2>
+				<ol>
+					<li class="fragment custom blur highlight-current-white fade-up">Mark reachable objects.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Sweep away unreachable objects.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Free up memory.</li>
+				</ol>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<img src="images/garbage.gif" alt="Stack Memory" height="600vh" />
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h1>Garbage</h1>
-				<ol>
-					<li class="fragment custom blur highlight-current-white fade-up">Mark reachable objects</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Sweep away unreachable objects</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Free up memory</li>
-				</ol>
-			</section>
-			<section data-transition="zoom" data-transition-speed="slow">
-				<h1>Examples & Fixes</h1>
+				<h1>Examples</h1>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h1>Memory Leak</h1>
@@ -299,7 +299,7 @@ console.log("detachedNode after setting to null: ", detachedNode);
 function outerFunction() {
 	let largeArray = new Array(1000000).fill('memory leak');
 	return function innerFunction() {
-		console.log(largeArray);
+		console.log(largeArray[0]);
 	};
 }
 const leak = outerFunction(); // `largeArray` is retained in memory.
@@ -353,7 +353,7 @@ button.removeEventListener('click', function() {
 });
 						</code>
 					</section>
-			<section data-transition="zoom" data-transition-speed="slow">Timers and Intervals</section>
+			<section data-transition="zoom" data-transition-speed="slow"><h1>Timers and Intervals</h1></section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Timers and Intervals: leak</h2>
 				<pre>
@@ -400,7 +400,7 @@ interval();
 				<ul>
 					<li class="fragment custom blur highlight-current-white fade-up">Heap Snapshots</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Allocation Timeline</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Allocation Profiler</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Performance Tab</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Detached DOM Nodes</li>
 				</ul>
 			</section>
@@ -492,6 +492,21 @@ obj = null; // Now `obj` can be garbage collected, and the entry in the WeakSet 
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h1>Summary</h1>
+				<ul>
+					<li class="fragment custom blur highlight-current-white fade-up">Memory leaks are a common problem in
+						JavaScript.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Excessive memory
+						consumption,
+						performance degradation, and application crashes.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Can occur in both the stack and
+						heap, but are more common in the heap.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Global variables, detached DOM nodes,
+						closures, event listeners, timers
+						and intervals.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Chrome DevTools, MemLab, Fuite, and WeakMap
+						and WeakSet.
+					</li>
+				</ul>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Contact</h2>

@@ -14,8 +14,8 @@ fetchData();
 console.log("my server data: ", serverData);
 
 // Mitigation
-function clearData() {
-  serverData = null;
-}
-clearData();
-console.log("my server data: ", serverData);
+// function clearData() {
+//   serverData = null;
+// }
+// clearData();
+// console.log("my server data: ", serverData);

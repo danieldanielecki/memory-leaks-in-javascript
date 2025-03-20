@@ -6,12 +6,12 @@ function createDetachedNode() {
   divElement.style.height = "50px";
   divElement.style.background = "red";
   document.body.appendChild(divElement);
-  // document.body.removeChild(divElement); // Removed from DOM
+  document.body.removeChild(divElement); // Removed from DOM
   detachedNode = divElement; // Still in memory
   console.log("detachedNode before setting to null: ", detachedNode);
 }
 createDetachedNode();
 
 // fix
-detachedNode = null; // Remove reference manually when no longer needed
-console.log("detachedNode after setting to null: ", detachedNode);
+// detachedNode = null; // Remove reference manually when no longer needed
+// console.log("detachedNode after setting to null: ", detachedNode);
