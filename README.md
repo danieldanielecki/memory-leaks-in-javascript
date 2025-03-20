@@ -33,7 +33,7 @@
 - https://www.geeksforgeeks.org/how-to-handle-memory-leaks-in-javascript/
 - https://www.reddit.com/r/learnjavascript/comments/qfycwa/how_can_you_prevent_memory_leaks_when_using/
 - https://stackoverflow.com/questions/2513785/is-memory-leak-caused-by-global-variables
--
+-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management
 
 <p align="center">
   <a href="https://revealjs.com">
