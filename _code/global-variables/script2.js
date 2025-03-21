@@ -1,5 +1,5 @@
 function createGlobalVar() {
-  globalVar = "I'm a global variable"; // Implicitly global
+  let globalVar = "I'm a global variable"; // Implicitly global
 }
 console.log(
   "window.globalVar before calling createGlobalVar(): ",
