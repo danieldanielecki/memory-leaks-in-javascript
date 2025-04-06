@@ -37,7 +37,7 @@
 				</div>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
-				<h1>101</h1>
+				<h1>Memory 101</h1>
 				<ol>
 					<li class="fragment custom blur highlight-current-white fade-up">Allocation (Creating variables/objects)</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Usage (Using them in computations)</li>
@@ -90,8 +90,7 @@
 					<li class="fragment custom blur highlight-current-white fade-up">It is used for storing local variables,
 						function parameters, and
 						return addresses.</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Fixed-size memory region that
-						grows and shrinks as functions are called and return.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Fixed-size.</li>
 				</ul>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
@@ -106,6 +105,70 @@
 					<li class="fragment custom blur highlight-current-white fade-up">Dynamic-size memory region that grows and
 						shrinks as memory is allocated and deallocated.</li>
 				</ul>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Stack vs Heap</h2>
+				<table border="1" cellpadding="8" cellspacing="0">
+					<thead>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<th>Feature</th>
+							<th>Stack</th>
+							<th>Heap</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Size</strong></td>
+							<td>Fixed (limited)</td>
+							<td>Flexible and large</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Speed</strong></td>
+							<td>Very fast</td>
+							<td>Slower (dynamic allocation)</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Purpose</strong></td>
+							<td>Function calls, local variables, return addresses</td>
+							<td>Objects, arrays, closures, large dynamic data</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Allocation</strong></td>
+							<td>Automatic (push/pop)</td>
+							<td>Manual or via Garbage Collector</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Stack vs Heap</h2>
+				<table border="1" cellpadding="8" cellspacing="0">
+					<thead>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<th>Feature</th>
+							<th>Stack</th>
+							<th>Heap</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Access</strong></td>
+							<td>LIFO (Last In, First Out)</td>
+							<td>Random access</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Structure</strong></td>
+							<td>Well-structured, ordered</td>
+							<td>Unstructured, managed by GC</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Typical Errors</strong></td>
+							<td class="fragment custom blur highlight-current-white fade-up">Stack overflow (too deep recursion)</td>
+							<td class="fragment custom blur highlight-current-white fade-up"><strong>Memory leaks</strong> (if not
+								properly cleaned)</td>
+						</tr>
+					</tbody>
+				</table>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Stack vs Heap</h2>
@@ -134,9 +197,6 @@
 					<li class="fragment custom blur highlight-current-white fade-up">If your application produces garbage too
 						fast,
 						the garbage collector may not free the memory used by garbage fast enough.</li>
-					<li class="fragment custom blur highlight-current-white fade-up">This will appear that the application keep
-						consuming memory, but it's not memory leak. It's just that the rate of the garbage produced by an
-						application is higher than the rate of garbage recycling.</li>
 				</ul>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
@@ -498,8 +558,8 @@ obj = null; // Now `obj` can be garbage collected, and the entry in the WeakSet 
 					<li class="fragment custom blur highlight-current-white fade-up">Excessive memory
 						consumption,
 						performance degradation, and application crashes.</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Can occur in both the stack and
-						heap, but are more common in the heap.</li>
+					<li class="fragment custom blur highlight-current-white fade-up">Stack and
+						Heap, but are more common in the Heap.</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Global variables, detached DOM nodes,
 						closures, event listeners, timers
 						and intervals.</li>
