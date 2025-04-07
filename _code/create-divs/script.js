@@ -7,6 +7,8 @@ function grow() {
   }
   document.body.appendChild(fragment);
   x.push("x".repeat(999999));
+  console.log(x);
+  console.log(x.length);
 }
 
 document.getElementById("grow").addEventListener("click", grow);
