@@ -190,7 +190,7 @@
 				<h2>Garbage</h2>
 				<ul>
 					<li class="fragment custom blur highlight-current-white fade-up">Is not memory leak.</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Garbage will always be freed sooner or later
+					<li class="fragment custom blur highlight-current-white fade-up">Garbage should be freed sooner or later
 						by the garbage collector.</li>
 					<li class="fragment custom blur highlight-current-white fade-up">If your application produces garbage too
 						fast,
@@ -241,7 +241,7 @@ document.getElementById("grow").addEventListener("click", grow);
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Global Variables: leak</h2>
 				<pre>
-					<code class="language-javascript" data-trim data-line-numbers="|1|4-7|8|11|12">
+					<code class="language-javascript" data-trim data-line-numbers="|1|3,9|4-7|8|11|12">
 let serverData = [];
 
 function fetchData() {
@@ -506,9 +506,6 @@ module.exports = { url };
 				<h2>WeakMap</h2>
 				<ul>
 					<li class="fragment custom blur highlight-current-white fade-up">Collection of key/value pairs.</li>
-					<li class="fragment custom blur highlight-current-white fade-up">Keys are objects and the values can be
-						arbitrary
-						values.</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Key objects are held weakly.</li>
 					<li class="fragment custom blur highlight-current-white fade-up">Meaning they do not prevent garbage
 						collection if there are no other
