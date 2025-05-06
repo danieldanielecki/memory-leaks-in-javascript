@@ -32,8 +32,8 @@
 				<h1 style="margin: 15vh auto;">Memory Leaks in JavaScript</h1>
 				<p>Daniel Danielecki</p>
 				<div style="font-size: 1.5rem">
-					<small style="display: block;">Bologna, Italy</small>
-					<small>April 7, 2025</small>
+					<small style="display: block;">Regensburg, Germany</small>
+					<small>May 7, 2025</small>
 				</div>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
@@ -217,7 +217,7 @@
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Memory Leak</h2>
 				<pre>
-					<code class="language-javascript" data-trim data-line-numbers="|1|3,10|12|4|5-7|8|9">
+					<code class="language-javascript" data-trim data-line-numbers="|1|3,12|14|4|5-7|8|9|10|11">
 const x = [];
 
 function grow() {
@@ -227,6 +227,8 @@ function grow() {
 	}
 	document.body.appendChild(fragment);
 	x.push("x".repeat(999999));
+	console.log(x);
+  console.log(x.length);
 }
 
 document.getElementById("grow").addEventListener("click", grow);
@@ -368,7 +370,7 @@ leak();
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>Closures: mitigation</h2>
 				<pre>
-					<code class="language-javascript" data-trim data-line-numbers="|4|5|7-9">
+					<code class="language-javascript" data-trim data-line-numbers="|4|5|8">
 function outerFunction() {
 	let largeArray = new Array(1000000).fill("memory leak");
 
@@ -489,7 +491,7 @@ module.exports = { url };
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h1>WeakMap & WeakSet</h1>
 			</section>
-			<section data-transition="zoom" data-transition-speed="slow" data-visibility="hidden">
+			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>WeakMap & WeakSet</h2>
 				<ul>
 					<li class="fragment custom blur highlight-current-white fade-up">Data structures.</li>
@@ -500,7 +502,7 @@ module.exports = { url };
 						leaks.</li>
 				</ul>
 			</section>
-			<section data-transition="zoom" data-transition-speed="slow" data-visibility="hidden">
+			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>WeakMap</h2>
 				<ul>
 					<li class="fragment custom blur highlight-current-white fade-up">Collection of key/value pairs.</li>
@@ -513,17 +515,7 @@ module.exports = { url };
 						references to the object.</li>
 				</ul>
 			</section>
-			<section data-transition="zoom" data-transition-speed="slow" data-visibility="hidden">
-				<h2>WeakMap</h2>
-				<pre><code class="language-javascript" data-trim data-line-numbers="|1|2|3|4|5">
-let weakMap = new WeakMap();
-let obj = {};
-weakMap.set(obj, 'some value');
-// When `obj` is no longer referenced elsewhere, it can be garbage collected
-obj = null; // Now `obj` can be garbage collected, and the entry in the WeakMap is removed
-				</code></pre>
-			</section>
-			<section data-transition="zoom" data-transition-speed="slow" data-visibility="hidden">
+			<section data-transition="zoom" data-transition-speed="slow">
 				<h2>WeakSet</h2>
 				<ul>
 					<li class="fragment custom blur highlight-current-white fade-up">Collection of objects.</li>
@@ -532,14 +524,50 @@ obj = null; // Now `obj` can be garbage collected, and the entry in the WeakMap 
 						references to an object stored in a WeakSet, the object can be garbage collected.</li>
 				</ul>
 			</section>
-			<section data-transition="zoom" data-transition-speed="slow" data-visibility="hidden">
-				<h2>WeakSet</h2>
-				<pre><code class="language-javascript" data-trim data-line-numbers="|1|2|3|4|5">
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Map & Set</h2>
+				<pre><code class="language-javascript" data-trim data-line-numbers="|1|2|4,14|5-8|10|11|13|16|17|18">
+let map = new Map();
+let set = new Set();
+
+(function () {
+	let obj = {
+		name: "temp",
+		data: new Array(1000000).fill("leak"),
+	};
+
+	map.set(obj, "some metadata");
+	set.add(obj);
+
+	// Still works, but...
+})();
+
+// 'obj' is out of scope, but...
+// Map and Set keep a **strong reference**, so GC won't collect 'obj'!
+// This means that 'obj' will not be garbage collected until the Map and Set are cleared or go out of scope.
+				</code></pre>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>WeakMap & WeakSet</h2>
+				<pre><code class="language-javascript" data-trim data-line-numbers="|1|2|4,12|5-8|10|11|14|15|16|17|18">
+let weakMap = new WeakMap();
 let weakSet = new WeakSet();
-let obj = {};
-weakSet.add(obj);
-// When `obj` is no longer referenced elsewhere, it can be garbage collected
-obj = null; // Now `obj` can be garbage collected, and the entry in the WeakSet is removed
+
+(function () {
+	let obj = {
+		name: "temp",
+		data: new Array(1000000).fill("leak"),
+	};
+
+	weakMap.set(obj, "some metadata");
+	weakSet.add(obj);
+})();
+
+// At this point, obj is still in scope
+// After the function scope ends, 'obj' goes out of scope.
+// Since WeakMap and WeakSet hold a weak reference, 'obj' can be garbage-collected.
+// This means that if there are no other references to 'obj', it will be removed from memory.
+// This is a key difference from regular Map and Set, which hold strong references to their keys/values.
 				</code></pre>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
@@ -549,6 +577,64 @@ obj = null; // Now `obj` can be garbage collected, and the entry in the WeakSet 
 					<li class="fragment custom blur highlight-current-white fade-up">Prevent memory leaks by ensuring that objects
 						are not kept in memory longer than necessary.</li>
 				</ul>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Map & Set vs WeakMap & WeakSet</h2>
+				<table border="1" cellpadding="8" cellspacing="0">
+					<thead>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<th>Feature</th>
+							<th>Map & Set</th>
+							<th>WeakMap & WeakSet</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Holds strong reference</strong></td>
+							<td>Yes</td>
+							<td>No</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Prevents GC</strong></td>
+							<td>Yes</td>
+							<td>No</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Memory Leaks</strong></td>
+							<td class="fragment custom blur highlight-current-white fade-up"><strong>Likely</strong></td>
+							<td class="fragment custom blur highlight-current-white fade-up"><strong>Not likely</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section data-transition="zoom" data-transition-speed="slow">
+				<h2>Map & Set vs WeakMap & WeakSet</h2>
+				<table border="1" cellpadding="8" cellspacing="0">
+					<thead>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<th>Feature</th>
+							<th>Map & Set</th>
+							<th>WeakMap & WeakSet</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Iterable</strong></td>
+							<td>Yes</td>
+							<td>No</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Keys must be objects</strong></td>
+							<td>Yes</td>
+							<td>No</td>
+						</tr>
+						<tr class="fragment custom blur highlight-current-white fade-up">
+							<td><strong>Use cases</strong></td>
+							<td>Data manipulation</td>
+							<td>Caching, metadata</td>.
+						</tr>
+					</tbody>
+				</table>
 			</section>
 			<section data-transition="zoom" data-transition-speed="slow">
 				<h1>Summary</h1>
